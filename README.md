@@ -5,12 +5,12 @@ Silver stripe widget for displaying custom twitter widgets
 
 ## Install instructions
 ### Add it to your project with:
-`composer require gdmedia/silverstripe-widget-twitter-widgets`
+`composer require gdmedia/silverstripe-widget-twitter-widgets`  
 Run `/dev/build`
 ## Setup instructions
 
 
- 1.  Create a "User Widget" on Twitter.
+ 1.  Create a "User Widget" on Twitter.  
 Head over to the [Create a user widget](https://twitter.com/settings/widgets/new) page on twitter and create your widget.
 Copy the HTML  located above the *"Copy and paste the code into the HTML of your site"* (Which appears after saving your widget)
  2. Create a new "Twitter Widgets Widget" in your site admin
