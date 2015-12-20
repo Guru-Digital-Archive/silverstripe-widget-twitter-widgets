@@ -1,6 +1,7 @@
 <?php
 
-class TwitterWidgetsWidget extends Widget {
+class TwitterWidgetsWidget extends Widget
+{
 
     private static $db = array(
         "TwitterHTML"     => "Text",
@@ -23,7 +24,8 @@ class TwitterWidgetsWidget extends Widget {
      */
     private static $description = "Display Twitter widget on your site.";
 
-    public function SmallWidget() {
+    public function SmallWidget()
+    {
         $result = array(
             "WidgetTitle"   => $this->Title,
             "WidgetContent" => $this->WidgetContent
@@ -31,18 +33,21 @@ class TwitterWidgetsWidget extends Widget {
         return $result;
     }
 
-    public function Title() {
+    public function Title()
+    {
         return $this->WidgetLabel;
     }
 
-    public function getCMSFields() {
+    public function getCMSFields()
+    {
         $fields = parent::getCMSFields();
         $fields->addFieldToTab("Root.Main", $fields->dataFieldByName("WidgetName"), "Enabled");
         $fields->addFieldToTab("Root.Main", $fields->dataFieldByName("WidgetLabel"), "Enabled");
         return $fields;
     }
 
-    public function onBeforeWrite() {
+    public function onBeforeWrite()
+    {
         parent::onBeforeWrite();
         if ($this->TwitterHTML) {
             $hrefAndId             = array();
@@ -51,5 +56,4 @@ class TwitterWidgetsWidget extends Widget {
             $this->TwitterWidgetID = isset($hrefAndId[2][0]) ? $hrefAndId[2][0] : "";
         }
     }
-
 }
