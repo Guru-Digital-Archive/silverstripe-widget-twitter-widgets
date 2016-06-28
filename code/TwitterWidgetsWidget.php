@@ -4,7 +4,7 @@ class TwitterWidgetsWidget extends Widget
 {
 
     private static $db = array(
-        "TwitterHTML"     => "Text",
+        "TwitterHTML"     => "HTMLText",
         "Href"            => "Text",
         "TwitterWidgetID" => "Text",
     );
@@ -12,13 +12,11 @@ class TwitterWidgetsWidget extends Widget
     /**
      * @var string
      */
-    private static $title = "Twitter Widget";
-
+    private static $title = "Twitter";
     /**
      * @var string
      */
-    private static $cmsTitle = "Widget containg a Twitter Widget";
-
+    private static $cmsTitle = "Twitter Widget";
     /**
      * @var string
      */
@@ -36,8 +34,11 @@ class TwitterWidgetsWidget extends Widget
 
     public function getCMSFields()
     {
-        $fields = new FieldList(
-            new TextareaField('TwitterHTML', 'Twitter Html')
+        $fields = parent::getCMSFields();
+        $fields->merge(
+            new FieldList(
+                new TextareaField('TwitterHTML', 'Twitter Html')
+            )
         );
 
         return $fields;
