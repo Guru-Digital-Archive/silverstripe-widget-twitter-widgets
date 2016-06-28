@@ -4,7 +4,7 @@ class TwitterWidgetsWidget extends Widget
 {
 
     private static $db = array(
-        "TwitterHTML"     => "Text",
+        "TwitterHTML"     => "HTMLText",
         "Href"            => "Text",
         "TwitterWidgetID" => "Text",
     );
@@ -12,13 +12,11 @@ class TwitterWidgetsWidget extends Widget
     /**
      * @var string
      */
-    private static $title = "Twitter Widget";
-
+    private static $title = "Twitter";
     /**
      * @var string
      */
-    private static $cmsTitle = "Widget containg a Twitter Widget";
-
+    private static $cmsTitle = "Twitter Widget";
     /**
      * @var string
      */
@@ -28,21 +26,21 @@ class TwitterWidgetsWidget extends Widget
     {
         $result = array(
             "WidgetTitle"   => $this->Title,
-            "WidgetContent" => $this->WidgetContent
+            "WidgetContent" => $this->WidgetContent,
         );
-        return $result;
-    }
 
-    public function Title()
-    {
-        return $this->WidgetLabel;
+        return $result;
     }
 
     public function getCMSFields()
     {
         $fields = parent::getCMSFields();
-        $fields->addFieldToTab("Root.Main", $fields->dataFieldByName("WidgetName"), "Enabled");
-        $fields->addFieldToTab("Root.Main", $fields->dataFieldByName("WidgetLabel"), "Enabled");
+        $fields->merge(
+            new FieldList(
+                new TextareaField('TwitterHTML', 'Twitter Html')
+            )
+        );
+
         return $fields;
     }
 
@@ -50,9 +48,9 @@ class TwitterWidgetsWidget extends Widget
     {
         parent::onBeforeWrite();
         if ($this->TwitterHTML) {
-            $hrefAndId             = array();
+            $hrefAndId = array();
             preg_match_all('/<a.*href="(.+)".*data-widget-id="([0-9]*)".*>.*<\/a>/U', $this->TwitterHTML, $hrefAndId);
-            $this->Href            = isset($hrefAndId[1][0]) ? $hrefAndId[1][0] : "";
+            $this->Href = isset($hrefAndId[1][0]) ? $hrefAndId[1][0] : "";
             $this->TwitterWidgetID = isset($hrefAndId[2][0]) ? $hrefAndId[2][0] : "";
         }
     }
